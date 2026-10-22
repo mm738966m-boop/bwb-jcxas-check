@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>BWB・JCXAS 確認シート</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800&family=Zen+Maru+Gothic:wght@700;900&display=swap">
+<style>
+/* 1列の確認シート。調べた内容→合っている/ちがう/わからない→補足、をくり返す。いつもの緑系ティール×金。明るい1テーマで固定 */
+:root{
+  color-scheme: light;
+  --teal:#0E7C86; --deep:#0A5A62; --ink:#1C3236; --ink2:#4A6468;
+  --soft:#EEF6F7; --line:#D5E4E6; --gold:#A87A1F; --goldfill:#D9A441; --goldbg:#FBF4E3; --bg:#fff;
+  --ok:#1E7D5A; --okbg:#EAF6F0; --ng:#B4442F; --ngbg:#FCEDEA; --mid:#6B7F82; --midbg:#F1F4F4;
+  --f-body:"Noto Sans JP","Hiragino Sans","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  --f-disp:"Zen Maru Gothic","Noto Sans JP","Hiragino Maru Gothic ProN",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:18px;font-weight:500;line-height:1.85;word-break:auto-phrase}
+.wrap{max-width:760px;margin:0 auto;padding-block:0 96px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hero{padding-top:36px;display:grid;grid-template-columns:1fr 120px;gap:18px;align-items:center}
+.hero img{width:120px;height:auto;justify-self:end}
+.eyebrow{display:inline-block;background:var(--soft);color:var(--deep);border:1px solid var(--line);border-radius:999px;padding:3px 14px;font-size:14px;font-weight:700;letter-spacing:.06em;margin-bottom:12px}
+h1{font-family:var(--f-disp);font-size:clamp(28px,7vw,38px);font-weight:900;line-height:1.35;margin:0 0 10px;color:var(--deep);text-wrap:balance}
+.lede{color:var(--ink2);margin:0}
+@media (max-width:520px){.hero{grid-template-columns:1fr}.hero img{width:96px;justify-self:center;order:-1}}
+.how{margin-top:22px;background:var(--goldbg);border:1.5px solid var(--goldfill);border-radius:16px;padding:14px 18px}
+.how ol{margin:0;padding-left:1.3em}
+.how li{margin:2px 0}
+section{margin-top:48px}
+h2{font-family:var(--f-disp);font-size:clamp(23px,6vw,28px);font-weight:900;line-height:1.45;margin:0 0 4px;color:var(--deep);padding-left:14px;border-left:5px solid var(--goldfill)}
+.src{font-size:15px;color:var(--ink2);margin:0 0 14px 19px;word-break:break-all}
+.src a{color:var(--deep)}
+.item{border:1.5px solid var(--line);border-radius:16px;padding:16px 18px;margin-top:12px;background:#fff}
+.item.st-ok{border-color:var(--ok)}.item.st-ng{border-color:var(--ng)}.item.st-q{border-color:var(--mid)}
+.item h3{margin:0 0 4px;font-size:15px;font-weight:800;color:var(--gold);letter-spacing:.04em}
+.item .fact{margin:0;font-size:18px;font-weight:700;line-height:1.7}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.btns button{font:700 15.5px var(--f-body);border-radius:999px;padding:6px 16px;border:1.5px solid var(--line);background:#fff;color:var(--ink2);cursor:pointer;min-height:40px}
+.btns button[aria-pressed="true"].b-ok{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.btns button[aria-pressed="true"].b-ng{background:var(--ngbg);border-color:var(--ng);color:var(--ng)}
+.btns button[aria-pressed="true"].b-q{background:var(--midbg);border-color:var(--mid);color:var(--ink)}
+button:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid var(--goldfill);outline-offset:2px}
+textarea,input[type=text]{width:100%;font:500 17px var(--f-body);color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:#FAFCFC;line-height:1.7}
+textarea{min-height:64px;resize:vertical;margin-top:10px}
+.item textarea{display:none}
+.item.open textarea{display:block}
+.qa{border:1.5px solid var(--line);border-radius:16px;padding:16px 18px;margin-top:12px}
+.qa label{display:block;font-weight:800;color:var(--deep);font-size:17.5px;line-height:1.6}
+.qa small{display:block;color:var(--ink2);font-size:15px;font-weight:600}
+.qa textarea{display:block}
+.send{position:sticky;bottom:0;margin-top:40px;background:var(--deep);color:#fff;border-radius:18px;padding:18px 20px calc(18px + env(safe-area-inset-bottom,0px));box-shadow:0 -6px 24px rgba(10,90,98,.18)}
+.send p{margin:0 0 10px;font-size:16px;color:#E3F1F2}
+.send .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.send input{flex:1 1 200px;min-width:0;background:#fff}
+.send button{font:800 17px var(--f-body);background:var(--goldfill);color:#fff;border:0;border-radius:999px;padding:12px 22px;cursor:pointer;min-height:48px}
+.send .done{display:none;margin-top:10px;font-weight:700;color:#F3DDA8}
+.send.sent #done{display:block}.send.failed #fail{display:block}
+.send button:disabled{opacity:.6;cursor:wait}
+#out{position:absolute;left:-9999px;top:0;width:1px;height:1px}
+.count{font-size:15px;color:#CFE6E8;margin-top:6px}
+.close{margin-top:40px;display:grid;grid-template-columns:72px 1fr;gap:14px;align-items:center}
+.close img{width:72px;height:auto}
+.close p{margin:0;font-size:16px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <span class="eyebrow">AI研修　事前のすり合わせ</span>
+      <h1>BWB・JCXAS 確認シート</h1>
+      <p class="lede">ホームページなど、公開されている情報から調べてまとめました。合っているか、足りないところはないか、教えてください。いただいた内容は、研修で作る「会社メモ」（Claudeが毎回最初に読む会社の説明）の材料にします。</p>
+    </div>
+    <img src="img/mascot_point.webp" alt="そろばんを持ったロボット">
+  </header>
+
+  <div class="how">
+    <ol>
+      <li>それぞれの内容に「合っている」「ちがう」「わからない」を押す</li>
+      <li>ちがう・足したいときは、出てくる欄に書く</li>
+      <li>下の質問に、分かる範囲で答える（空欄のままで大丈夫です）</li>
+      <li>いちばん下にお名前を入れて「送信する」を押す（途中まででも送れます）</li>
+    </ol>
+  </div>
+
+  <section>
+    <h2>BWB（BIG WEST BROTHERS）</h2>
+    <p class="src">調べたところ：<a href="https://bwbcs.co.jp" target="_blank" rel="noopener">bwbcs.co.jp</a></p>
+    <div id="bwb"></div>
+  </section>
+
+  <section>
+    <h2>JCXAS（ジェクサス）</h2>
+    <p class="src">調べたところ：<a href="https://jcxas.com" target="_blank" rel="noopener">jcxas.com</a>／DMMオンラインサロン「JCXASトーキングサークル」</p>
+    <div id="jcxas"></div>
+  </section>
+
+  <section>
+    <h2>補足を教えてください</h2>
+    <p class="src">ホームページだけでは分からなかったことです。分かる範囲で大丈夫です。</p>
+    <div id="qs"></div>
+  </section>
+
+  <div class="send" id="send">
+    <p>書き終わったら、お名前を入れて「送信する」を押してください。森川に届きます。</p>
+    <div class="row">
+      <input type="text" id="who" placeholder="お名前（例：みっち・Nick）" aria-label="お名前">
+      <input type="text" id="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">
+      <button type="button" id="copy">送信する</button>
+    </div>
+    <div class="count" id="count"></div>
+    <div class="done" id="done">送信しました。ありがとうございました。</div>
+    <div class="done" id="fail" style="color:#FFD9D0">送れませんでした。もう一度押すか、回答をコピーしてLINEで送ってください（コピーしてあります）。</div>
+    <textarea id="out" aria-hidden="true" tabindex="-1"></textarea>
+  </div>
+
+  <div class="close">
+    <img src="img/mascot_think.webp" alt="">
+    <p>書いた内容は、このパソコンのこのブラウザに一時的に残ります。途中で閉じても大丈夫です。送信したあとに書き足して、もう一度送っても大丈夫です。<br>森川</p>
+  </div>
+</div>
+
+<script>
+var DATA={
+  bwb:[
+    ["会社名・代表","BIG WEST BROTHERS 合同会社。代表は大西徳昭さん"],
+    ["事業","コンプライアンスとグローバル人財育成の、コンサルティングとセミナー・研修"],
+    ["研修の種類","階層別（役員・幹部、管理職、新人・若手）、ハラスメント対応、法務・コンプライアンス部門向け、ビジネス英語・英語プレゼン・異文化対応"],
+    ["セミナーの位置づけ","セミナー・研修は、コンサルティングを知ってもらう入口"],
+    ["実績","日経、BUSINESS LAWYERS、企業研究会、プロネクサス×HTC などで登壇"],
+    ["申し込み","問い合わせフォームから。料金はホームページに載せていない"],
+    ["ホームページの更新","お知らせ欄の最新は 2024年1月（JCXAS発進のお知らせ）"]
+  ],
+  jcxas:[
+    ["正式名・運営","日本コンプライアンストランスフォーメーション協会。運営は JCXAS株式会社（東京都港区芝）。大西さんはファウンダー＆チーフアーキテクト"],
+    ["考え方","息苦しいコンプライアンスを、ポジティブなものに変える。働く人の幸せと、組織が叶えたい未来のために"],
+    ["トーキングサークル（TC）","会員限定のオンライン交流会。毎月第4水曜 20時〜22時。次回は10/28（法務の社内ブランディング）、11/25（改正公益通報者保護法）"],
+    ["ワーキンググループ（WG）","1つのテーマを1年かけて深める研究会"],
+    ["入会のしかた","DMMオンラインサロン「JCXASトーキングサークル」から。個人 月1,500円・法人 月7,500円。カード払いは30日無料。入会審査あり。入会するとJCXAS会員になる"],
+    ["そのほかの活動","セミナーのご依頼を受付。港区立産業振興センターとの共催セミナーも"],
+    ["発信","X（@JCXAS_VOICE）"]
+  ],
+  qs:[
+    ["いま、いちばん力を入れているサービスは？","BWBとJCXAS、それぞれ"],
+    ["JCXASの会員さんは、何人くらい・どんな方ですか？","業種・役職・地域など、ざっくりで"],
+    ["トーキングサークルの新しい会員さんは、いまどこから来ていますか？","紹介・セミナー・SNS・Voicy など"],
+    ["セミナーや研修の依頼は、どこから来ることが多いですか？","研修会社経由・直接・紹介 など"],
+    ["みっちさんが担当している仕事を、会社ごとに教えてください","BWBで◯◯、JCXASで◯◯"],
+    ["請求書は、どちらの会社から、月に何通くらい出していますか？","使っているもの（Excel・Word・freee・マネーフォワード など）も"],
+    ["JCXASの会費（DMM経由）の入金は、どう確かめていますか？","確かめていなければ、そのままで大丈夫です"],
+    ["社内でよく使う言葉・呼び方はありますか？","TC・WG・GAPs のほかに"],
+    ["AIに渡したくないもの・気をつけたいことは？","第1回の「線引き」で一緒に決めます"]
+  ]
+};
+var KEY='bwb-jcxas-check-v1', state={};
+try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){state={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}count()}
+function el(t,c,txt){var e=document.createElement(t);if(c)e.className=c;if(txt!=null)e.textContent=txt;return e}
+function renderFacts(group){
+  var box=document.getElementById(group);
+  DATA[group].forEach(function(f,i){
+    var id=group+i, s=state[id]||{};
+    var it=el('div','item'); it.appendChild(el('h3',null,f[0])); it.appendChild(el('p','fact',f[1]));
+    var b=el('div','btns');
+    [['ok','合っている','b-ok'],['ng','ちがう・足したい','b-ng'],['q','わからない','b-q']].forEach(function(o){
+      var x=el('button',o[2],o[1]); x.type='button'; x.setAttribute('aria-pressed',s.v===o[0]?'true':'false');
+      x.onclick=function(){
+        var cur=state[id]||{}; cur.v=(cur.v===o[0])?'':o[0]; state[id]=cur; save(); paint();
+        if(cur.v==='ng'){ta.focus()}
+      };
+      b.appendChild(x);
+    });
+    it.appendChild(b);
+    var ta=el('textarea'); ta.id='t-'+id; ta.placeholder='正しくは… ／ 足すなら…'; ta.value=s.t||'';
+    ta.setAttribute('aria-label',f[0]+'の補足');
+    ta.oninput=function(){var cur=state[id]||{};cur.t=ta.value;state[id]=cur;save()};
+    it.appendChild(ta);
+    function paint(){
+      var v=(state[id]||{}).v||'';
+      it.className='item'+(v?' st-'+v:'')+((v==='ng'||(state[id]||{}).t)?' open':'');
+      [].forEach.call(b.children,function(x,k){x.setAttribute('aria-pressed',['ok','ng','q'][k]===v?'true':'false')});
+    }
+    paint(); box.appendChild(it);
+  });
+}
+function renderQs(){
+  var box=document.getElementById('qs');
+  DATA.qs.forEach(function(q,i){
+    var id='q'+i, w=el('div','qa'), lb=el('label'); lb.htmlFor='t-'+id;
+    lb.appendChild(document.createTextNode(q[0])); lb.appendChild(el('small',null,q[1]));
+    var ta=el('textarea'); ta.id='t-'+id; ta.value=(state[id]||{}).t||'';
+    ta.oninput=function(){state[id]={t:ta.value};save()};
+    w.appendChild(lb); w.appendChild(ta); box.appendChild(w);
+  });
+}
+function count(){
+  var n=0,tot=DATA.bwb.length+DATA.jcxas.length;
+  ['bwb','jcxas'].forEach(function(g){DATA[g].forEach(function(f,i){if((state[g+i]||{}).v)n++})});
+  var a=0; DATA.qs.forEach(function(q,i){if(((state['q'+i]||{}).t||'').trim())a++});
+  document.getElementById('count').textContent='確認 '+n+' / '+tot+'　・　補足 '+a+' / '+DATA.qs.length;
+}
+function build(){
+  var L={ok:'合っている',ng:'ちがう・足したい',q:'わからない'};
+  var who=document.getElementById('who').value.trim();
+  var out=['【BWB・JCXAS 確認シート】'+(who?'　'+who:'')];
+  [['bwb','■BWB'],['jcxas','■JCXAS']].forEach(function(g){
+    out.push('',g[1]);
+    DATA[g[0]].forEach(function(f,i){
+      var s=state[g[0]+i]||{}; if(!s.v&&!(s.t||'').trim())return;
+      out.push('・'+f[0]+'：'+(L[s.v]||'—')+((s.t||'').trim()?'\n　→ '+s.t.trim():''));
+    });
+  });
+  out.push('','■補足');
+  DATA.qs.forEach(function(q,i){var t=((state['q'+i]||{}).t||'').trim(); if(t)out.push('・'+q[0]+'\n　→ '+t)});
+  return out.join('\n');
+}
+document.getElementById('who').value=state._who||'';
+document.getElementById('who').oninput=function(e){state._who=e.target.value;save()};
+var API='https://script.google.com/macros/s/AKfycbw9BW6w-NCJBTDl1tAv8LA3IOaJUyr6tBj-pqtRVgz81zK3Xih4JrNCgDl1rXTbzvwb1A/exec';
+document.getElementById('copy').onclick=function(){
+  var btn=this, txt=build(), send=document.getElementById('send'), out=document.getElementById('out');
+  var name=document.getElementById('who').value.trim();
+  send.classList.remove('sent','failed'); btn.disabled=true; btn.textContent='送信中…';
+  var fail=function(){
+    send.classList.add('failed'); btn.disabled=false; btn.textContent='送信する';
+    try{navigator.clipboard.writeText(txt).catch(function(){})}catch(e){}
+    out.value=txt;
+  };
+  fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({name:name,text:txt,website:document.getElementById('website').value})})
+    .then(function(r){return r.json()})
+    .then(function(j){ if(j&&j.ok){send.classList.add('sent');btn.disabled=false;btn.textContent='もう一度送信する'} else fail() })
+    .catch(fail);
+};
+renderFacts('bwb');renderFacts('jcxas');renderQs();count();
+</script>
+</body>
+</html>
